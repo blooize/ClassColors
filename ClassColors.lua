@@ -6,6 +6,7 @@
 	https://www.curseforge.com/wow/addons/classcolors
 	https://www.wowinterface.com/downloads/info12513-ClassColors.html
 ----------------------------------------------------------------------]]
+local category, layout
 
 local _, ns = ...
 if CUSTOM_CLASS_COLORS then
@@ -371,14 +372,16 @@ f:SetScript("OnEvent", function(self, event, addon)
 
 	--------------------------------------------------------------------
 
-	InterfaceOptions_AddCategory(self)
+	category, layout = Settings.RegisterCanvasLayoutCategory(f, f.name, f.name);
+	category.ID = f.name 
+	Settings.RegisterAddOnCategory(category);
 
 	--------------------------------------------------------------------
 
 	SLASH_CLASSCOLORS1 = "/classcolors"
 	SlashCmdList.CLASSCOLORS = function()
-		InterfaceOptionsFrame_OpenToCategory(self)
-		InterfaceOptionsFrame_OpenToCategory(self)
+		Settings.OpenToCategory(category.ID)
+		Settings.OpenToCategory(category.ID)
 	end
 
 	--------------------------------------------------------------------
